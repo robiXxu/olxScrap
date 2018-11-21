@@ -5,7 +5,3 @@ def clean(value):
 
 def cleanDate(value):
   return re.search('[0-9]{1,2}( ){1}[a-z]+( ){1}[0-9]{4}', value, re.IGNORECASE).group(0)
-
-def cleanVal(o):
-  print o
-  return o

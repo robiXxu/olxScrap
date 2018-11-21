@@ -12,7 +12,8 @@ class OlxSpider(scrapy.Spider):
 
   def start_requests(self):
     start_urls = [
-      'https://www.olx.ro/oferte/q-logitech-g910/'
+      # 'https://www.olx.ro/oferte/q-logitech-g910/',
+      'https://www.olx.ro/imobiliare/case-de-vanzare/'
     ]
 
     for url in start_urls:
@@ -51,5 +52,5 @@ class OlxSpider(scrapy.Spider):
       props.append( (key, value) )
     otherProperties = dict(props)
     il.add_value('otherProperties', otherProperties)
-
-    print il.load_item()
+    
+    yield il.load_item()

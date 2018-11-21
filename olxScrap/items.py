@@ -7,35 +7,31 @@
 
 import scrapy
 from scrapy.loader.processors import Join, MapCompose, TakeFirst
-from w3lib.html import remove_tags
-import re
 
-
-def clean(value):
-  return value.strip()
-
-def cleanDate(value):
-    return re.search('[0-9]{1,2}( ){1}[a-z]+( ){1}[0-9]{4}', value, re.IGNORECASE).group(0)
+import utils
 
 class Ad(scrapy.Item):
+  url = scrapy.Field()
   title = scrapy.Field(
-    input_processor=MapCompose(remove_tags,clean),
+    input_processor=MapCompose(utils.clean),
     output_processor=Join()
   )
   location = scrapy.Field(
-    input_processor=MapCompose(remove_tags,clean),
+    input_processor=MapCompose(utils.clean),
     output_processor=TakeFirst()
   )
   description = scrapy.Field(
-    input_processor=MapCompose(remove_tags,clean),
+    input_processor=MapCompose(utils.clean),
     output_processor=TakeFirst()
   )
   price = scrapy.Field(
-    input_processor=MapCompose(remove_tags,clean),
+    input_processor=MapCompose(utils.clean),
     output_processor=Join()
   )
   addedAt = scrapy.Field(
-    input_processor=MapCompose(remove_tags,clean,cleanDate),
+    input_processor=MapCompose(utils.clean,utils.cleanDate),
     output_processor=Join()
   )
+
   images = scrapy.Field()
+  otherProperties = scrapy.Field()

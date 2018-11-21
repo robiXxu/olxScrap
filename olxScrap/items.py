@@ -10,12 +10,15 @@ from scrapy.loader.processors import Join, MapCompose, TakeFirst
 from w3lib.html import remove_tags
 
 
+def clean(value):
+  return value.strip()
+
 class Ad(scrapy.Item):
   title = scrapy.Field(
-    input_processor=MapCompose(TakeFirst,remove_tags),
+    input_processor=MapCompose(remove_tags,clean),
     output_processor=Join()
   )
   location = scrapy.Field(
-    input_processor=MapCompose(TakeFirst,remove_tags),
-    output_processor=Join()
+    input_processor=MapCompose(remove_tags,clean),
+    output_processor=TakeFirst()
   )

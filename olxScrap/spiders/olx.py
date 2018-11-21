@@ -28,7 +28,6 @@ class OlxSpider(scrapy.Spider):
 
     def parseItemPage(self, response):
       il = ItemLoader(item=Ad(), response=response)
-      il.add_value('title', 'test')
-      # il.add_css('title','div#offer_active h1')
-      # il.add_css('title','div#offer_active a.show-map-link')
+      il.add_css('title','div#offer_active h1')
+      il.add_css('location','div#offer_active a.show-map-link')
       print il.load_item()

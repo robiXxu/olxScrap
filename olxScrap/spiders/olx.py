@@ -32,6 +32,7 @@ class OlxSpider(scrapy.Spider):
       il.add_css('location','div#offer_active a.show-map-link')
       il.add_css('description', 'div#offer_active div#textContent')
       il.add_css('price', 'div#offer_active div.price-label')
+      il.add_css('addedAt', 'div#offer_active em')
       images = []
       for img in response.css('div#offer_active div.tcenter.img-item'):
         images.append(img.css('img::attr(src)').extract_first())

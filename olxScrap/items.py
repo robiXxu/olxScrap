@@ -8,10 +8,14 @@
 import scrapy
 from scrapy.loader.processors import Join, MapCompose, TakeFirst
 from w3lib.html import remove_tags
+import re
 
 
 def clean(value):
   return value.strip()
+
+def cleanDate(value):
+    return re.search('[0-9]{1,2}( ){1}[a-z]+( ){1}[0-9]{4}', value, re.IGNORECASE).group(0)
 
 class Ad(scrapy.Item):
   title = scrapy.Field(
@@ -28,6 +32,10 @@ class Ad(scrapy.Item):
   )
   price = scrapy.Field(
     input_processor=MapCompose(remove_tags,clean),
+    output_processor=Join()
+  )
+  addedAt = scrapy.Field(
+    input_processor=MapCompose(remove_tags,clean,cleanDate),
     output_processor=Join()
   )
   images = scrapy.Field()

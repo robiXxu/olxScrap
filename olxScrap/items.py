@@ -22,3 +22,12 @@ class Ad(scrapy.Item):
     input_processor=MapCompose(remove_tags,clean),
     output_processor=TakeFirst()
   )
+  description = scrapy.Field(
+    input_processor=MapCompose(remove_tags,clean),
+    output_processor=TakeFirst()
+  )
+  price = scrapy.Field(
+    input_processor=MapCompose(remove_tags,clean),
+    output_processor=Join()
+  )
+  images = scrapy.Field()

@@ -1,4 +1,4 @@
-# olxScrap
+# olx-scrap-py
 
 #### a scrapper attempt for olx.ro with scrapy :)
 
